@@ -13,7 +13,9 @@ def linkedin_companies_parser(url):
             response = requests.get(url, headers=headers)
             formatted_response = response.content.replace('<!--', '').replace('-->', '')
             doc = html.fromstring(formatted_response)
+            print(doc.text_content())
             datafrom_xpath = doc.xpath('//code[@id="stream-promo-top-bar-embed-id-content"]//text()')
+            print(datafrom_xpath)
             if datafrom_xpath:
                 try:
                     json_formatted_data = json.loads(datafrom_xpath[0])

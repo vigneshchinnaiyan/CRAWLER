@@ -8,9 +8,9 @@
 import scrapy
 
 
-class LinkedinscraperItem(scrapy.Item):
+class SgpbusinessItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
+    company_name = scrapy.Field()
+    company_address = scrapy.Field()
+    registration_type = scrapy.Field()
     company_website = scrapy.Field()
-    company_location = scrapy.Field()
-       

@@ -1,24 +1,45 @@
 import cv2
 import numpy as np
 import thinning as th
+import pytesseract
+from PIL import Image
+import math
 
 file_name = raw_input('Enter file name: ')
-#print(file_name)
+
 greyscale_captcha = cv2.imread(file_name, 0)
-#print(greyscale_captcha[0][0])
+
 _ ,binarized_captcha = cv2.threshold(greyscale_captcha,127,255,cv2.THRESH_BINARY)
-#print(binarized_captcha)
+
 cv2.imwrite('greyscale_captcha.jpg', greyscale_captcha)
 cv2.imwrite('binarized_captcha.jpg', binarized_captcha)
+image = Image.open('binarized_captcha.jpg')
 
-sobel_horizontal_edge_filter = np.array([[1, 2, 1], [0, 0, 0], [-1, -2, -1]])
-sobel_vertical_edge_filter = np.array([[1, 0, -1],[2, 0, -2], [1, 0, -1]])
+image_height = binarized_captcha.shape[0]
+image_width = binarized_captcha.shape[1]
 
-horizontal_edge_strength = th.MyConvolve(binarized_captcha, sobel_horizontal_edge_filter)
-vertical_edge_strength = th.MyConvolve(binarized_captcha, sobel_vertical_edge_filter)
-print(horizontal_edge_strength)
-print(vertical_edge_strength)
-edge_detected_array = th.combine_edges(horizontal_edge_strength, vertical_edge_strength, 'sobel')
-thinned_edge = th.edge_thinning(edge_detected_array)
-cv2.imwrite('edge_captcha.jpg', edge_detected_array)
-cv2.imwrite('thinned_edge.jpg', thinned_edge)
+print pytesseract.image_to_string(Image.open('binarized_captcha.jpg'))
+
+character_width = 47
+starting_index = 24
+first_char = image.crop((starting_index, 0, starting_index + character_width, image_height))
+starting_index = starting_index + character_width
+second_char = image.crop((starting_index, 0, starting_index + character_width, image_height))
+starting_index = starting_index + character_width
+third_char = image.crop((starting_index, 0, starting_index + character_width, image_height))
+starting_index = starting_index + character_width
+fourth_char = image.crop((starting_index, 0, starting_index + character_width, image_height))
+starting_index = starting_index + character_width
+fifth_char = image.crop((starting_index, 0, starting_index + character_width, image_height))
+
+first_char.save('first_char.jpg')
+second_char.save('second_char.jpg')
+third_char.save('third_char.jpg')
+fourth_char.save('fourth_char.jpg')
+fifth_char.save('fifth_char.jpg')
+
+print pytesseract.image_to_string(Image.open('first_char.jpg'), config="-psm 10")
+print pytesseract.image_to_string(Image.open('second_char.jpg'), config="-psm 10")
+print pytesseract.image_to_string(Image.open('third_char.jpg'), config="-psm 10")
+print pytesseract.image_to_string(Image.open('fourth_char.jpg'), config="-psm 10")
+print pytesseract.image_to_string(Image.open('fifth_char.jpg'), config="-psm 10")

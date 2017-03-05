@@ -1,4 +1,4 @@
-import urllib2
+import requests
 import json
 import re
 from bs4 import BeautifulSoup
@@ -64,20 +64,13 @@ def search_contact_info_section(contact_info):
 			retrieved_contact_info[key] = value
 		print(retrieved_contact_info)	
 
-	"""
-	sections = find_us_title.parent.findAll('div')
-	found_strings = []
-	for section in sections:
-		section_string = str(section)
-	print(found_strings)	
-	"""
 
 def main():
 	# Change URL to scrape the different page
 	url = "https://www.facebook.com/timbreplus/about/"
 
-	web_response = urllib2.urlopen(url)
-	readable_page = web_response.read()
+	web_response = requests.get(url)
+	readable_page = web_response.text
 	soup = BeautifulSoup(readable_page, "html.parser")
 
 	contact_info = soup.findAll("div", id = re.compile('PagesProfileAboutFullColumnPagelet'))

@@ -12,6 +12,7 @@ class linkedInSpider(scrapy.Spider):
 
 	def parse(self, response):
 		item = LinkedinscraperItem()
+		print(response)
 		item['company_website'] = response.xpath('/div[@class="basic-info-about"]/ul/li[@class="website"]/p/a/@href').extract()
 		item['company_location'] = response.xpath('/div[@class="basic-info-about"]/ul/li[@class="vcard hq"]/p//span/text()').extract()
 		print item

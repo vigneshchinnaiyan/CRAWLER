@@ -66,22 +66,25 @@ def edge_thinning(edge_detected_array):
     for i in range(1, rows_for_img - 1):
         for j in range(1, columns_for_img - 1):
             current_pixel_val = edge_detected_array[i][j]
-            left_pixel_val = edge_detected_array[i][j-1]
-            right_pixel_val = edge_detected_array[i][j+1]
+            # left_pixel_val = edge_detected_array[i][j-1]
+            # right_pixel_val = edge_detected_array[i][j+1]
+            up_pixel_val = edge_detected_array[i-1][j]
+            down_pixel_val = edge_detected_array[i+1][j]
 
-            max_value_horizontal = max(current_pixel_val, left_pixel_val, right_pixel_val)
-
-            if current_pixel_val == max_value_horizontal:
+            #max_value_horizontal = max(current_pixel_val, left_pixel_val, right_pixel_val)
+            max_value_vertical = max(current_pixel_val, up_pixel_val, down_pixel_val)
+            if current_pixel_val == max_value_vertical:
                 thinned_edge[i][j] = edge_detected_array[i][j]
             else:
-                up_pixel_val = edge_detected_array[i-1][j]
-                down_pixel_val = edge_detected_array[i+1][j]
+                thinned_edge[i][j] = 0.0
+                # up_pixel_val = edge_detected_array[i-1][j]
+                # down_pixel_val = edge_detected_array[i+1][j]
 
-                max_value_vertical = max(current_pixel_val, up_pixel_val, down_pixel_val)
+                # max_value_vertical = max(current_pixel_val, up_pixel_val, down_pixel_val)
 
-                if current_pixel_val == max_value_vertical:
-                    thinned_edge[i][j] = edge_detected_array[i][j]
-                else:
-                    #thinned_edge[i][j] = [0.0, 0.0, 0.0]
-                    thinned_edge[i][j] = 0.0
+                # if current_pixel_val == max_value_vertical:
+                #     thinned_edge[i][j] = edge_detected_array[i][j]
+                # else:
+                #     #thinned_edge[i][j] = [0.0, 0.0, 0.0]
+                #     thinned_edge[i][j] = 0.0
     return thinned_edge
