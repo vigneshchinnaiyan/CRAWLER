@@ -3,9 +3,12 @@ import csv, os, json
 import requests
 from exceptions import ValueError
 from time import sleep
+import sys
  
- 
-def linkedin_companies_parser(url):
+extracted_data = [] 
+visited_urls = set()
+
+def linkedin_companies_parser(url, companyurls):
     for i in range(5):
         try:
             headers = {
@@ -18,6 +21,18 @@ def linkedin_companies_parser(url):
             formatted_response = response.content.replace('<!--', '').replace('-->', '')
             doc = html.fromstring(formatted_response)
             print response
+            f_2 = open('response.txt', 'w')
+            f_2.write(response.content)
+            f_2.close() 
+
+            # we obtain urls to other 
+            if response.status_code == 200:
+                other_companies_link = doc.xpath('//code[@id="stream-right-rail-embed-id-content"]//text()')
+                other_companies_data = json.loads(other_companies_link[0])
+                also_viewed = other_companies_data['alsoViewed']
+                for other_company in also_viewed:
+                    companyurls.append(other_company["homeUrl"])
+
             # print(doc.text_content())
             datafrom_xpath = doc.xpath('//code[@id="stream-promo-top-bar-embed-id-content"]//text()')
             # print(datafrom_xpath)
@@ -33,7 +48,7 @@ def linkedin_companies_parser(url):
                     website = json_formatted_data['website'] if 'website' in json_formatted_data.keys() else None
                     type = json_formatted_data['companyType'] if 'companyType' in json_formatted_data.keys() else None
                     specialities = json_formatted_data['specialties'] if 'specialties' in json_formatted_data.keys() else None
- 
+
                     if "headquarters" in json_formatted_data.keys():
                         city = json_formatted_data["headquarters"]['city'] if 'city' in json_formatted_data["headquarters"].keys() else None
                         country = json_formatted_data["headquarters"]['country'] if 'country' in json_formatted_data['headquarters'].keys() else None
@@ -50,7 +65,7 @@ def linkedin_companies_parser(url):
                         street2 = None
                         street = None
                         zip = None
- 
+
                     data = {
                                 'company_name': company_name,
                                 'size': size,
@@ -68,9 +83,14 @@ def linkedin_companies_parser(url):
                                 'zip': zip,
                                 'url': url
                             }
+                    # other_companies_link = doc.xpath('//ul[contains(@class,"org-similar-companies-module__company-list)')
+                    # print other_companies_link          
                     return data
                 except:
                     print "cant parse page", url
+
+                other_companies_link = doc.xpath('//ul[contains(@class,"org-similar-companies-module__company-list)')
+                print other_companies_link    
  
             # Retry in case of captcha or login page redirection
             if len(response.content) < 2000 or "trk=login_reg_redirect" in url:
@@ -78,18 +98,32 @@ def linkedin_companies_parser(url):
                     print "linkedin page not found"
                 else:
                     raise ValueError('redirecting to login page or captcha found')
+        
+        except KeyboardInterrupt:
+            f = open('data.json', 'w')
+            json.dump(extracted_data, f, indent=4)  
+            sys.exit()
+                    
         except :
             print "retrying :",url
  
 def readurls():
     companyurls = ['https://www.linkedin.com/company/great-eastern-life']
-    extracted_data = []
-    for url in companyurls:
-        extracted_data.append(linkedin_companies_parser(url))
-        sleep(5)
-        f = open('data.json', 'w')
-        json.dump(extracted_data, f, indent=4)
- 
+
+    while companyurls:
+        try:
+            if companyurls[0] not in visited_urls:
+                visited_urls.add(companyurls[0])
+                extracted_data.append(linkedin_companies_parser(companyurls.pop(0), companyurls))
+                sleep(5)
+
+            else:
+                companyurls.pop(0)
+                continue    
+        except KeyboardInterrupt:
+            f = open('data.json', 'w')
+            json.dump(extracted_data, f, indent=4)        
+            sys.exit()
  
 if __name__ == "__main__":
     readurls()

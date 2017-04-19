@@ -17,8 +17,7 @@ def determine_field_and_value(current_section):
 	key = ""
 	value = ""
 	text_content = image_tag.parent.next_sibling
-	print(text_content.renderContents())
-	print "here"
+
 	while(text_content.find('div') != None):
 		text_content = text_content.find('div')
 
@@ -44,7 +43,7 @@ def search_contact_info_section(contact_info):
 	find_us_title = contact_info[0].find('span')
 	#print find_us_title
 	contact_info_title = contact_info[0].find('div', text = re.compile('CONTACT DETAILS'))
-	print contact_info_title
+
 	retrieved_contact_info = {}
 
 	if find_us_title:
@@ -54,8 +53,7 @@ def search_contact_info_section(contact_info):
 			current_section = current_section.next_sibling
 			#print current_section
 			key, value = determine_field_and_value(current_section)
-			retrieved_contact_info[key] = value
-		print retrieved_contact_info	
+			retrieved_contact_info[key] = value	
 
 	if contact_info_title:
 		current_section = contact_info_title
@@ -64,8 +62,7 @@ def search_contact_info_section(contact_info):
 			current_section = current_section.next_sibling
 			key, value = determine_field_and_value(current_section)
 			retrieved_contact_info[key] = value
-		print(retrieved_contact_info)	
-		print "here lah fuck"
+	print(retrieved_contact_info)	
 
 
 def main():
