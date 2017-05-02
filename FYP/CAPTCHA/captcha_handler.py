@@ -3,9 +3,8 @@ import numpy as np
 import thinning as th
 import pytesseract
 from PIL import Image
-import math
 
-file_name = raw_input('Enter file name: ')
+file_name = 'new_captcha.png'
 
 greyscale_captcha = cv2.imread(file_name, 0)
 
