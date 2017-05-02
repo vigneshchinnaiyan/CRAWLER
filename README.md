@@ -48,4 +48,18 @@ This is a proof of concept for breaking simple CAPTCHA images using the algorith
 In order to start using the Facebook Graph API, you must first obtain an Access Token from Facebook and set it as an environment variable. For more information, refer to here:
 https://developers.facebook.com/
 
-## 
+
+## Google Place API
+
+To start using Google Places API, you need to retrieve a Google API Key. Navigate here to find out more:
+https://developers.google.com/places/web-service/intro
+
+## Foursquare API
+
+To start using Foursquare API, you need to retrieve a Client Id and Client Secret which can be retrieved after setting up and creating a new app.
+
+For the code that we use, we only require Client ID and Client Secret to retrieve userless access. For more information:
+https://developer.foursquare.com/overview/auth
+
+
+
