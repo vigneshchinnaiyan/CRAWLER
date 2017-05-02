@@ -9,6 +9,8 @@ The CRAWLZ project uses the Facebook Graph API, the Foursquare API, and Google P
 
 First, clone the repo.
 Then run this in the terminal
+
+
 `pip install -r requirements.txt`
 
 ## SGPBusiness Scraper and breaking reCAPTCHA
