@@ -32,7 +32,7 @@ If you want an output file, run this command:
 
 ## LinkedIn initial scraper
 
-The LinkedIn initial scraper is not used in the main project and is only listed here as a proof-of-concept, however due to LinkedIn's strict policy of web crawlers, we did not use it in the end for the main project. It is recommended not to run the program for a long time to prevent any legal issues. 
+The LinkedIn initial scraper is not used in the main project and is only listed here as a proof-of-concept, however due to LinkedIn's strict policy of web crawlers, we did not use it in the end for the main project. It is recommended not to run the program for a long time to prevent any legal issues. The code is based on a code found here: https://www.scrapehero.com/tutorial-scraping-linkedin-for-public-company-data/
 
 You can try running the LinkedIn prototype scraper by navigating to the linkedin_scraper folder then running `python linkedin_initial.py`. The response returned by linkedin will be responses consisting of 200 and 999. 200 means it managed to retrieve company data, 999 means it failed. Use Ctrl-C in the middle of the program run to retrieve an output file named 'data.json'
 
@@ -42,3 +42,10 @@ You can try running the LinkedIn prototype scraper by navigating to the linkedin
 This is a proof of concept for breaking simple CAPTCHA images using the algorithm in the report. This code will break the image file named 'new_captcha.png' in the same folder.
 
 `python captcha_handler.py`
+
+## Facebook Graph API
+
+In order to start using the Facebook Graph API, you must first obtain an Access Token from Facebook and set it as an environment variable. For more information, refer to here:
+https://developers.facebook.com/
+
+## 
