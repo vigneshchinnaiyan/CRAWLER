@@ -34,6 +34,11 @@ If you want an output file, run this command:
 
 The LinkedIn initial scraper is not used in the main project and is only listed here as a proof-of-concept, however due to LinkedIn's strict policy of web crawlers, we did not use it in the end for the main project. It is recommended not to run the program for a long time to prevent any legal issues. 
 
-You can try running the LinkedIn prototype scraper by navigating to the linkedin_scraper folder then running linkedin_initial.py. The response returned by linkedin will be responses consisting of 200 and 999. 200 means it managed to retrieve company data, 999 means it failed. Use Ctrl-C in the middle of the program run to retrieve an output file named 'data.json'
+You can try running the LinkedIn prototype scraper by navigating to the linkedin_scraper folder then running `python linkedin_initial.py`. The response returned by linkedin will be responses consisting of 200 and 999. 200 means it managed to retrieve company data, 999 means it failed. Use Ctrl-C in the middle of the program run to retrieve an output file named 'data.json'
 
 
+## CAPTCHA
+
+This is a proof of concept for breaking simple CAPTCHA images using the algorithm in the report. This code will break the image file named 'new_captcha.png' in the same folder.
+
+`python captcha_handler.py`
