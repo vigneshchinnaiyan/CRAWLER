@@ -12,18 +12,14 @@ def linkedin_companies_parser(url, companyurls):
     for i in range(5):
         try:
             headers = {
-            #'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36'
             'User-Agent': "Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3"
             }
             sleep(3)
             response = requests.get(url, headers=headers)
-            #response = requests.get(url)
+
             formatted_response = response.content.replace('<!--', '').replace('-->', '')
             doc = html.fromstring(formatted_response)
             print response
-            # f_2 = open('response.txt', 'w')
-            # f_2.write(response.content)
-            # f_2.close() 
 
             # we obtain urls to other 
             if response.status_code == 200:
@@ -33,9 +29,9 @@ def linkedin_companies_parser(url, companyurls):
                 for other_company in also_viewed:
                     companyurls.append(other_company["homeUrl"])
 
-            # print(doc.text_content())
+
             datafrom_xpath = doc.xpath('//code[@id="stream-promo-top-bar-embed-id-content"]//text()')
-            # print(datafrom_xpath)
+
             if datafrom_xpath:
                 try:
                     json_formatted_data = json.loads(datafrom_xpath[0])
@@ -83,8 +79,7 @@ def linkedin_companies_parser(url, companyurls):
                                 'zip': zip,
                                 'url': url
                             }
-                    # other_companies_link = doc.xpath('//ul[contains(@class,"org-similar-companies-module__company-list)')
-                    # print other_companies_link          
+         
                     return data
                 except:
                     print "cant parse page", url
