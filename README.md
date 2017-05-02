@@ -17,6 +17,23 @@ Then run this in the terminal
 
 The SGPBusiness Scraper is not used in the final product of CRAWLZ, but is more of a proof of concept for beating Google's reCAPTCHA. The idea of breaking Google's reCAPTCHA through its audio challenge came from another Github repository: https://github.com/eastee/rebreakcaptcha
 
-The SGPBusiness is u
+The SGPBusiness uses Scrapy to scrape through the website. Scrapy can be installed via:
 
-## 
+`pip install Scrapy`
+
+It will be installed when installing the other dependencies as well. In order to run the scraper for SGPBusiness, navigate to the FYP/sgpbusiness/sgpbusiness_scraper folder then run this command:
+
+`scrapy crawl sgpbusiness`
+
+If you want an output file, run this command:
+
+`scrapy crawl sgpbusiness -o sgpbusiness_output.jl`
+
+
+## LinkedIn initial scraper
+
+The LinkedIn initial scraper is not used in the main project and is only listed here as a proof-of-concept, however due to LinkedIn's strict policy of web crawlers, we did not use it in the end for the main project. It is recommended not to run the program for a long time to prevent any legal issues. 
+
+You can try running the LinkedIn prototype scraper by navigating to the linkedin_scraper folder then running linkedin_initial.py. The response returned by linkedin will be responses consisting of 200 and 999. 200 means it managed to retrieve company data, 999 means it failed. Use Ctrl-C in the middle of the program run to retrieve an output file named 'data.json'
+
+
