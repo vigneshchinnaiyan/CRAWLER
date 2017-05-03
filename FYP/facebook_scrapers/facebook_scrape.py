@@ -12,6 +12,10 @@ MAIL_ICON = "https://static.xx.fbcdn.net/rsrc.php/v3/yg/r/wLlG5cEEIuu.png"
 LOCATION_ICON = "https://static.xx.fbcdn.net/rsrc.php/v3/yF/r/kS8eNysxft5.png"
 
 def determine_field_and_value(current_section):
+	"""
+	this function is supposed to map the image to the
+	contact information
+	"""
 	image_tag = current_section.find('img')
 	image_src = image_tag['src']
 	key = ""
@@ -38,10 +42,9 @@ def determine_field_and_value(current_section):
 	return key, value	
 
 def search_contact_info_section(contact_info):
-	#print contact_info
-	# NEED TO FIND BETTER WAY TO LOCATE "FIND US" SECTION
+
 	find_us_title = contact_info[0].find('span')
-	#print find_us_title
+
 	contact_info_title = contact_info[0].find('div', text = re.compile('CONTACT DETAILS'))
 
 	retrieved_contact_info = {}
@@ -51,7 +54,6 @@ def search_contact_info_section(contact_info):
 
 		while current_section.next_sibling != None:
 			current_section = current_section.next_sibling
-			#print current_section
 			key, value = determine_field_and_value(current_section)
 			retrieved_contact_info[key] = value	
 
@@ -71,8 +73,15 @@ def main():
 
 	web_response = requests.get(url)
 	readable_page = web_response.text
+
+	"""
+	we use beautifulsoup to navigate through html
+	"""
 	soup = BeautifulSoup(readable_page, "html.parser")
 
+	"""
+	here is the div where most of the contact information is found
+	"""
 	contact_info = soup.findAll("div", id = re.compile('PagesProfileAboutFullColumnPagelet'))
 
 	contact_info_array = search_contact_info_section(contact_info)

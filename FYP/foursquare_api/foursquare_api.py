@@ -96,9 +96,6 @@ def main():
 	for venue in first_venues:
 		next_venue_list.append(venue["venue"]["id"])
 		venue_memo.add(venue["venue"]["id"])
-	
-
-	#"https://api.foursquare.com/v2/venues/venue_id?client_id=CLIENT_ID&client_secret=CLIENT_SECRET&v=20170101"
 
 	for next_venue in next_venue_list:
 

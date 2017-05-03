@@ -4,18 +4,17 @@ import json
 
 FACEBOOK_ACCESS_TOKEN = os.environ.get('FACEBOOK_ACCESS_TOKEN')
 
-def concatenate_facebook_location(company_location_dict):
-	company_street = company_location_dict['street'] if ('street' in company_location_dict) else ''
-	company_country = company_location_dict['country'] if ('country' in company_location_dict)  else ''
-	company_postal = company_location_dict['zip'] if ('zip' in company_location_dict) else ''
-	company_location = company_street + ', ' + company_country + ' ' + company_postal
-	company_location = company_location.strip()
-	company_location = company_location.strip(',')
-
-	return company_location
-
 
 def facebook_fetch(graph, facebook_id):
+    """
+    Parameters:
+    graph: graph object
+    facebook_id: string
+
+    Outputs:
+    facebook_company_info: dict
+    """
+
     facebook_company_info = graph.get_object(id=facebook_id, fields='name, about, location, phone, category, description, fan_count, hours, link, call_to_actions')
     if facebook_company_info.has_key("call_to_actions") and facebook_company_info["call_to_actions"].has_key("data"):
         for obj in facebook_company_info["call_to_actions"]["data"]:
@@ -32,14 +31,11 @@ def facebook_parse(fb_id, facebook_company_info):
     """
     Parameters:
     facebook_company_info: dict, from fetcher, using get_object function
+    fb_id: string
 
     Outputs:
     company_info: dict , information of the company
-    other_companies_pages: array, each element containing an id and name
-    , description, fan_count, hours, link
-
-    TO-DO:
-    company_postal and company_street should not both be under address
+    potential leads: array
     """
 
     if facebook_company_info:
@@ -91,7 +87,11 @@ def write_to_json_file(contact, potential_leads):
     json.dump(contact, f, indent=4)  
     json.dump(potential_leads, f, indent=4)    
 
+
 def call_facebook_graph_api():
+    """
+    Main function of the program
+    """
     FACEBOOK_ACCESS_TOKEN = os.environ.get('FACEBOOK_ACCESS_TOKEN')
 
     graph = facebook.GraphAPI(FACEBOOK_ACCESS_TOKEN)
