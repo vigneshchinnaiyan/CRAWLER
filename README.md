@@ -13,11 +13,11 @@ Then run this in the terminal
 
 `pip install -r requirements.txt`
 
-## SGPBusiness Scraper and breaking reCAPTCHA
+## Business Scraper and breaking reCAPTCHA
 
-The SGPBusiness Scraper is not used in the final product of CRAWLZ, but is more of a proof of concept for beating Google's reCAPTCHA. The idea of breaking Google's reCAPTCHA through its audio challenge came from another Github repository: https://github.com/eastee/rebreakcaptcha
+The Business Scraper is not used in the final product of CRAWLZ, but is more of a proof of concept for beating Google's reCAPTCHA. The idea of breaking Google's reCAPTCHA through its audio challenge came from another Github repository: https://github.com/eastee/rebreakcaptcha
 
-The SGPBusiness uses Scrapy to scrape through the website. Scrapy can be installed via:
+The Business uses Scrapy to scrape through the website. Scrapy can be installed via:
 
 `pip install Scrapy`
 
