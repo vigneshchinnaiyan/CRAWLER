@@ -1,9 +1,9 @@
 
 # Scraping Methods for CRAWLZ
 
-These different methods implement different ways of collecting data from Facebook, Google, Foursquare and SGPBusiness, and is used for the CRAWLZ project found over at https://github.com/crawlzstage/infra
+These different methods implement different ways of collecting data from Facebook, Google, Foursquare and Business, and is used for the CRAWLZ project found over at https://github.com/crawlzstage/infra
 
-The CRAWLZ project uses the Facebook Graph API, the Foursquare API, and Google Places API mainly for retrieving data. The LinkedIn and SGPBusiness scrapers are prototypical scrapers that was implemented at the start but was not used later on for the final product.
+The CRAWLZ project uses the Facebook Graph API, the Foursquare API, and Google Places API mainly for retrieving data. The LinkedIn and Business scrapers are prototypical scrapers that was implemented at the start but was not used later on for the final product.
 
 ## Install Dependencies
 
@@ -21,7 +21,7 @@ The Business uses Scrapy to scrape through the website. Scrapy can be installed 
 
 `pip install Scrapy`
 
-It will be installed when installing the other dependencies as well. In order to run the scraper for SGPBusiness, navigate to the FYP/sgpbusiness/sgpbusiness_scraper folder then run this command:
+It will be installed when installing the other dependencies as well. In order to run the scraper for Business, navigate to the FYP/sgpbusiness/sgpbusiness_scraper folder then run this command:
 
 `scrapy crawl sgpbusiness`
 
