@@ -1,10 +1,10 @@
 #Install Python3 on Amazon Linux 2
-`sudo yum install python37 python37-pip`
+ `sudo yum install python37 python37-pip`
 
 Install Pip on Amazon Linux 2
 #Download get-pip to current directory. It won't install anything, as of now
-`curl -O https://bootstrap.pypa.io/get-pip.py`
+ `curl -O https://bootstrap.pypa.io/get-pip.py`
 
 #Use python3.6 to install pip
-`python3 get-pip.py`
+ `python3 get-pip.py`
 #this will install pip3 and pip3.6 
